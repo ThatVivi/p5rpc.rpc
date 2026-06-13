@@ -86,7 +86,7 @@ jobs:
         
     - name: Build
       working-directory: ./p5rpc.rpc
-      run: ./Publish.ps1 -ChangelogPath "$env:PUBLISH_CHANGELOG_PATH"
+      run: ./Publish.ps1   # Removed the -ChangelogPath argument
       
     - name: Upload GitHub Release Artifact
       uses: actions/upload-artifact@v4
