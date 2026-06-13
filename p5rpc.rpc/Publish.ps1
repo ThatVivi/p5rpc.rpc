@@ -156,7 +156,7 @@ param (
     $RemoveExe = $True,
 	
     ## => User Config <= ## 
-    $ProjectPath = "p5r.rpc.csproj",
+    $ProjectPath = "p5rpc.rpc.csproj",
     $PackageName = "p5r.rpc",
     $PublishOutputDir = "Publish/ToUpload",
 
