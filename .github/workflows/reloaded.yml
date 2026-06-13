@@ -85,6 +85,7 @@ jobs:
         }
         
     - name: Build
+      working-directory: ./p5rpc.rpc
       run: ./Publish.ps1 -ChangelogPath "$env:PUBLISH_CHANGELOG_PATH"
       
     - name: Upload GitHub Release Artifact
