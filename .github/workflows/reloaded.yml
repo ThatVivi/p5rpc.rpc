@@ -23,14 +23,14 @@ on:
   workflow_dispatch:
 
 env: 
-  PUBLISH_COMMON_PATH: ./Publish/ToUpload/
+  PUBLISH_COMMON_PATH: p5rpc.rpc/Publish/ToUpload/
 
-  PUBLISH_GAMEBANANA_PATH: ./Publish/ToUpload/GameBanana
-  PUBLISH_GITHUB_PATH: ./Publish/ToUpload/Generic
-  PUBLISH_NUGET_PATH: ./Publish/ToUpload/NuGet
+  PUBLISH_GAMEBANANA_PATH: p5rpc.rpc/Publish/ToUpload/GameBanana
+  PUBLISH_GITHUB_PATH: p5rpc.rpc/Publish/ToUpload/Generic
+  PUBLISH_NUGET_PATH: p5rpc.rpc/Publish/ToUpload/NuGet
   
-  PUBLISH_CHANGELOG_PATH: ./Publish/Changelog.md
-  PUBLISH_PATH: ./Publish
+  PUBLISH_CHANGELOG_PATH: p5rpc.rpc/Publish/Changelog.md
+  PUBLISH_PATH: p5rpc.rpc/Publish
 
   # Default value is official Reloaded package server.  
   NUGET_URL: http://packages.sewer56.moe:5000/v3/index.json
@@ -93,21 +93,21 @@ jobs:
       with:
         name: GitHub Release
         path: |
-          p5rpc.rpc/${{ env.PUBLISH_GITHUB_PATH }}/*
+          ${{ env.PUBLISH_GITHUB_PATH }}/*
           
     - name: Upload GameBanana Release Artifact
       uses: actions/upload-artifact@v4
       with:
         name: GameBanana Release
         path: |
-          p5rpc.rpc/${{ env.PUBLISH_GAMEBANANA_PATH }}/*
+          ${{ env.PUBLISH_GAMEBANANA_PATH }}/*
         
     - name: Upload NuGet Release Artifact
       uses: actions/upload-artifact@v4
       with:
         name: NuGet Release
         path: |
-          p5rpc.rpc/${{ env.PUBLISH_NUGET_PATH }}/*
+          ${{ env.PUBLISH_NUGET_PATH }}/*
         
     - name: Upload Changelog Artifact
       uses: actions/upload-artifact@v4
