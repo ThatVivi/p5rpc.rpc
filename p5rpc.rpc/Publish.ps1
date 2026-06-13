@@ -198,8 +198,8 @@ $reloadedToolsPath = "./Publish/Tools/Reloaded-Tools"    # Used to check if tool
 $updateToolsPath   = "./Publish/Tools/Update-Tools"      # Used to check if update tools are installed.
 $reloadedToolPath = "$reloadedToolsPath/Reloaded.Publisher.exe"  # Path to Reloaded publishing tool.
 $updateToolPath   = "$updateToolsPath/Sewer56.Update.Tool.dll" # Path to Update tool.
-$changelogFullPath = [System.IO.Path]::GetFullPath($ChangelogPath)
-$readmeFullPath = [System.IO.Path]::GetFullPath($ReadmePath)
+$changelogFullPath = if ($ChangelogPath) { [System.IO.Path]::GetFullPath($ChangelogPath) } else { "" }
+$readmeFullPath = if ($ReadmePath) { [System.IO.Path]::GetFullPath($ReadmePath) } else { "" }
 
 ## => Script <= ##
 # Set Working Directory

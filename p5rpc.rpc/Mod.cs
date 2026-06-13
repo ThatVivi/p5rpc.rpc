@@ -61,6 +61,7 @@ namespace p5rpc.rpc
         private EventInfo? _lastEvent;
         private List<string> _states = new();
         private bool _stateChanged = false;
+        private SequenceType _currentSequence = SequenceType.NONE;
         private RichPresence _presence;
 
         public Mod(ModContext context)
@@ -88,7 +89,7 @@ namespace p5rpc.rpc
             if (_fields == null || _events == null)
                 return;
 
-            _client = new DiscordRpcClient("1032265834111975424");
+            _client = new DiscordRpcClient(_configuration.DiscordAppId);
             _client.Initialize();
 
             _presence = new RichPresence();
@@ -113,9 +114,11 @@ namespace p5rpc.rpc
 
             int fieldMajor = _flowCaller.FLD_GET_MAJOR();
             int fieldMinor = _flowCaller.FLD_GET_MINOR();
-            Field? field = ProcessField(fieldMajor, fieldMinor);
 
             var sequence = _p5rLib.Sequencer.GetSequenceInfo();
+            _currentSequence = sequence.CurrentSequence;
+
+            Field? field = ProcessField(fieldMajor, fieldMinor);
 
             if ((fieldMajor != -1 || fieldMinor != -1) && (sequence.CurrentSequence != SequenceType.EVENT && sequence.CurrentSequence != SequenceType.EVENT_VIEWER))
                 _currentEvent = null; // Not in an event if it isn't -1_-1
@@ -177,7 +180,7 @@ namespace p5rpc.rpc
 
             string imageKey = "logo";
             string imageText = "P5R Logo";
-            string description = "Roaming somewhere";
+            string description = GetSequenceFallback();
             if (field != null)
             {
                 if (_lastField == null || (_lastField.Major != fieldMajor || _lastField.Minor != fieldMinor))
@@ -205,6 +208,33 @@ namespace p5rpc.rpc
             _presence.Details = description;
 
             return field;
+        }
+
+        private string GetSequenceFallback()
+        {
+            switch (_currentSequence)
+            {
+                case SequenceType.BATTLE:
+                case SequenceType.DUNGEON_RESULT:
+                    return "In a battle";
+                case SequenceType.CALENDAR:
+                case SequenceType.CALENDAR_RESET:
+                    return "Time passes by...";
+                case SequenceType.MOVIE:
+                case SequenceType.MOVIE_VIEWER:
+                    return "Watching a cutscene";
+                case SequenceType.EVENT:
+                case SequenceType.EVENT_VIEWER:
+                    return "In a conversation";
+                case SequenceType.TITLE:
+                case SequenceType.TITLE_RAPID:
+                    return "On the title screen";
+                case SequenceType.LOAD:
+                case SequenceType.INIT_READ:
+                    return "Loading...";
+                default:
+                    return "Roaming somewhere";
+            }
         }
 
         private void ProcessBattle(Field field)

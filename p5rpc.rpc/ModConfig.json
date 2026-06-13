@@ -14,8 +14,13 @@
   "ReleaseMetadataFileName": "p5rpc.rpc.ReleaseMetadata.json",
   "PluginData": {},
   "IsUniversalMod": false,
-  "ModDependencies": [ "reloaded.sharedlib.hooks", "p5rpc.lib" ],
+  "ModDependencies": [
+    "reloaded.sharedlib.hooks",
+    "p5rpc.lib"
+  ],
   "OptionalDependencies": [],
-  "SupportedAppId": ["p5r.exe"],
-  "ProjectUrl": ""
+  "SupportedAppId": [
+    "p5r.exe"
+  ],
+  "ProjectUrl": "https://github.com/YOUR_GITHUB_USERNAME/p5rpc.rpc"
 }

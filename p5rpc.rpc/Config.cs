@@ -25,6 +25,11 @@ namespace p5rpc.rpc.Configuration
             The `DefaultValue` attribute is used as part of the `Reset` button in Reloaded-Launcher.
         */
 
+        [DisplayName("Discord Application ID")]
+        [Description("The Discord Application (client) ID used for rich presence. Leave as default to use the original mod's images, or set your own app's ID after uploading custom Art Assets (see the repo's LOCATIONS_GUIDE.md).")]
+        [DefaultValue("1032265834111975424")]
+        public string DiscordAppId { get; set; } = "1032265834111975424";
+
         [DisplayName("Debug Mode")]
         [Description("Logs additional information to the console that is useful for debugging.")]
         public bool DebugEnabled { get; set; } = false;
